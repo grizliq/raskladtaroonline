@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#140e2e">
+<title>Расклад Таро онлайн — задай вопрос и получи ответ на три карты</title>
+<meta name="description" content="Расклад Таро онлайн на свои вопросы: три карты колоды Уэйта и понятная расшифровка. Что происходит, что скрыто и каким может быть следующий шаг. В браузере или в Telegram, первый расклад бесплатно.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://tarovopros.ru/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tarovopros.ru/">
+<meta property="og:site_name" content="Vitrio Таро">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Расклад Таро онлайн на свои вопросы">
+<meta property="og:description" content="Три карты колоды Уэйта и понятная расшифровка. В браузере или в Telegram.">
+<meta property="og:image" content="https://tarovopros.ru/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css?v=e5bdb864">
+<script src="app.js?v=85a83dd8" defer></script>
+</head>
+<body>
+
+<!-- ============================ ШАПКА ============================ -->
+<header class="nav">
+  <div class="nav__bar">
+    <a class="logo" href="#top" aria-label="Vitrio Таро — на главную">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="38" height="38" rx="11" fill="#7c5cfc"/>
+          <path d="M20 9l2.4 5.9 5.9 2.4-5.9 2.4L20 25.6l-2.4-5.9-5.9-2.4 5.9-2.4z" fill="#fff"/>
+          <circle cx="29" cy="28" r="2.1" fill="#e5bd68"/>
+          <circle cx="12" cy="27" r="1.5" fill="#e5bd68"/>
+        </svg>
+      </span>
+      <span class="logo__text">vitrio</span>
+      <span class="logo__sub">Таро</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Основная навигация">
+      <a href="#how">Как это работает</a>
+      <a href="#telegram">В Telegram</a>
+      <a href="#cases">Вопросы</a>
+      <a href="#faq">Частые вопросы</a>
+    </nav>
+
+    <a class="btn btn--violet btn--sm nav__cta" data-cta href="https://vitrio.space/8nnj73xngh" target="_blank" rel="sponsored noopener">Сделать расклад</a>
+  </div>
+  <p class="nav__caption">Vitrio Таро — расклад на три карты онлайн</p>
+</header>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <!-- колесо-циферблат и карты по углам: фон, в разметке их
+         держим отдельно от контента и прячем от скринридеров -->
+    <svg class="hero__wheel" viewBox="0 0 600 600" aria-hidden="true">
+      <circle cx="300" cy="300" r="268"/>
+      <circle cx="300" cy="300" r="238" stroke-dasharray="3 9"/>
+      <circle cx="300" cy="300" r="196"/>
+      <line x1="300" y1="20" x2="300" y2="48"/>
+      <line x1="300" y1="552" x2="300" y2="580"/>
+      <line x1="20" y1="300" x2="48" y2="300"/>
+      <line x1="552" y1="300" x2="580" y2="300"/>
+    </svg>
+
+    <div class="hero__cards" aria-hidden="true">
+      <span class="tcard" data-card="moon"></span>
+      <span class="tcard" data-card="priestess"></span>
+      <span class="tcard" data-card="sun"></span>
+      <span class="tcard" data-card="star"></span>
+    </div>
+
+    <div class="shell hero__grid">
+      <div>
+        <h1>Получи расклад Таро <span class="accent">на свои вопросы</span></h1>
+        <p class="hero__lead">
+          Сформулируйте вопрос — и получите расклад на три карты колоды Уэйта
+          с понятной расшифровкой: что происходит сейчас, что остаётся скрытым
+          и каким может быть следующий шаг.
+        </p>
+      </div>
+
+      <!-- Демо. Повторяет сценарий сервиса: вопрос, раздача трёх карт,
+           имена и ключевые слова. Карты рисуются SVG из шаблона в app.js,
+           растровых картинок нет совсем. -->
+      <div class="deal" id="demoDeal">
+        <div class="deal__ask">
+          <p class="deal__label">Что тебя интересует?</p>
+          <p class="deal__q" data-role="question"><em>Что ждёт наши отношения в ближайшие полгода?</em></p>
+
+          <div class="deal__actions">
+            <button class="btn btn--violet" type="button" data-role="run">
+              Сделать расклад
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="11" height="15" rx="2"/><path d="M8.5 3h9a2 2 0 012 2v12"/></svg>
+            </button>
+            <a class="btn btn--ghost" href="#how">Что означают позиции</a>
+          </div>
+          <p class="deal__meta">3 карты · колода Уэйта</p>
+        </div>
+
+        <div class="deal__spread">
+          <div class="slot">
+            <p class="slot__pos">Что происходит</p>
+            <div class="slot__flip">
+              <div class="slot__inner">
+                <span class="tcard tcard--back"></span>
+                <span class="tcard tcard--face" data-card="lovers"></span>
+              </div>
+            </div>
+            <p class="slot__name">Влюблённые</p>
+            <p class="slot__keys">близость · выбор · согласие</p>
+          </div>
+
+          <div class="slot">
+            <p class="slot__pos">Что скрыто</p>
+            <div class="slot__flip">
+              <div class="slot__inner">
+                <span class="tcard tcard--back"></span>
+                <span class="tcard tcard--face" data-card="moon"></span>
+              </div>
+            </div>
+            <p class="slot__name">Луна</p>
+            <p class="slot__keys">неясность · воображение</p>
+          </div>
+
+          <div class="slot">
+            <p class="slot__pos">Твой следующий шаг</p>
+            <div class="slot__flip">
+              <div class="slot__inner">
+                <span class="tcard tcard--back"></span>
+                <span class="tcard tcard--face" data-card="star"></span>
+              </div>
+            </div>
+            <p class="slot__name">Звезда</p>
+            <p class="slot__keys">надежда · вдохновение</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ПОЗИЦИИ ============================ -->
+  <section class="section" id="how">
+    <div class="shell">
+      <span class="eyebrow">Расклад на три карты</span>
+      <h2 class="section__title section__title--center">Три позиции, которые закрывают вопрос</h2>
+      <p class="section__lead">Классическая тройка читается слева направо. Каждая карта отвечает за свой слой ситуации — поэтому расклад получается не набором символов, а связным ответом.</p>
+
+      <div class="pos__grid">
+        <article class="pos">
+          <span class="pos__num">01 · Настоящее</span>
+          <h3>Что происходит</h3>
+          <p>Первая карта описывает положение дел таким, какое оно есть. Не прогноз и не оценка — обозначение того, что уже сложилось к моменту вопроса.</p>
+        </article>
+        <article class="pos">
+          <span class="pos__num">02 · Подтекст</span>
+          <h3>Что скрыто</h3>
+          <p>Вторая показывает слой, который не на поверхности: чужие мотивы, собственные допущения, недостающие сведения. Чаще всего ответ прячется именно здесь.</p>
+        </article>
+        <article class="pos">
+          <span class="pos__num">03 · Движение</span>
+          <h3>Твой следующий шаг</h3>
+          <p>Третья — не предсказание исхода, а направление, в котором разумно двигаться. Её удобно читать как совет, а не как приговор.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TELEGRAM ============================ -->
+  <section class="tg" id="telegram">
+    <div class="shell">
+      <div class="tg__card">
+        <div class="tg__copy">
+          <span class="tg__badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L7.1 12.4 2.6 11c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.1 1.7z"/></svg>
+            Бот в Telegram
+          </span>
+          <h2>Расклад всегда под рукой</h2>
+          <p>
+            Тот же расклад на три карты, только в переписке. Открыли чат,
+            написали вопрос своими словами — карты и расшифровка приходят
+            прямо в диалог. Ничего не нужно устанавливать и нигде регистрироваться.
+          </p>
+
+          <ul class="tg__list">
+            <li>Вопрос задаётся обычным сообщением, как другу</li>
+            <li>Расклад и разбор остаются в истории чата — можно вернуться через месяц</li>
+            <li>Работает с телефона в дороге, без вкладок и закладок</li>
+            <li>Аккаунт у вас уже есть: отдельная регистрация не нужна</li>
+          </ul>
+
+          <div class="tg__actions">
+            <a class="btn btn--tg" data-cta href="https://t.me/TaroVitrioBot" target="_blank" rel="sponsored noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L7.1 12.4 2.6 11c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.1 1.7z"/></svg>
+              Открыть бота
+            </a>
+            <a class="btn btn--ghost" data-cta href="https://vitrio.space/8nnj73xngh" target="_blank" rel="sponsored noopener">Сделать в браузере</a>
+          </div>
+        </div>
+
+        <!-- Переписка: верстаем пузырями, а не скриншотом —
+             текст остаётся текстом и читается на любом экране. -->
+        <div class="tg__phone">
+          <div class="phone">
+            <span class="phone__notch" aria-hidden="true"></span>
+            <div class="phone__head">
+              <span class="phone__ava" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#e5bd68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2"/></svg>
+              </span>
+              <span class="phone__who">
+                <b>Vitrio Таро</b>
+                <span>бот</span>
+              </span>
+            </div>
+
+            <div class="phone__chat">
+              <p class="bub bub--in">Задай свой вопрос — и я сделаю расклад на три карты ✨</p>
+              <p class="bub bub--out">Что ждёт наши отношения в ближайшие полгода?</p>
+              <div class="bub bub--in">
+                Вот твой расклад:
+                <span class="bub__cards" aria-hidden="true">
+                  <span class="tcard" data-card="lovers"></span>
+                  <span class="tcard" data-card="moon"></span>
+                  <span class="tcard" data-card="star"></span>
+                </span>
+              </div>
+              <p class="bub bub--in">Влюблённые, Луна и Звезда: близость проходит через период сомнений, но направление светлое.</p>
+            </div>
+
+            <p class="phone__field">Сообщение…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ КАК ЧИТАТЬ ============================ -->
+  <section class="section" id="read">
+    <div class="shell">
+      <span class="eyebrow">Пример разбора</span>
+      <h2 class="section__title section__title--center">Как выглядит расшифровка</h2>
+      <p class="section__lead">К каждой карте идёт не только значение, но и совет — что с этим делать на практике. Ниже настоящий пример по раскладу из первого экрана.</p>
+
+      <div class="read__grid">
+        <article class="read">
+          <div class="read__top">
+            <span class="tcard read__mini" data-card="lovers" aria-hidden="true"></span>
+            <span>
+              <span class="read__pos">Что происходит</span>
+              <span class="read__name">Влюблённые</span>
+            </span>
+          </div>
+          <p>Ситуация связана не только с чувствами, но и с выбором: насколько желания, ценности и ожидания двоих действительно совпадают.</p>
+          <p class="read__tip"><b>Совет карты</b><span>Сформулируйте для себя три главных ожидания от отношений и выберите одно, которое спокойно обсудите.</span></p>
+        </article>
+
+        <article class="read">
+          <div class="read__top">
+            <span class="tcard read__mini" data-card="moon" aria-hidden="true"></span>
+            <span>
+              <span class="read__pos">Что скрыто</span>
+              <span class="read__name">Луна</span>
+            </span>
+          </div>
+          <p>Скрытым слоем может быть не чужая тайна, а общая неясность: неполные сведения, тревожные догадки, переменчивые сигналы.</p>
+          <p class="read__tip"><b>Совет карты</b><span>Разделите на листе факты, свои предположения и вопросы, которые можно задать прямо.</span></p>
+        </article>
+
+        <article class="read">
+          <div class="read__top">
+            <span class="tcard read__mini" data-card="star" aria-hidden="true"></span>
+            <span>
+              <span class="read__pos">Следующий шаг</span>
+              <span class="read__name">Звезда</span>
+            </span>
+          </div>
+          <p>Звезда предлагает двигаться не через давление и не через попытку немедленно получить гарантию, а через спокойную надежду.</p>
+          <p class="read__tip"><b>Совет карты</b><span>Предложите один спокойный разговор об ожиданиях, заранее решив, какие границы хотите обозначить.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ПОВОДЫ ============================ -->
+  <section class="section" id="cases">
+    <div class="shell">
+      <h2 class="section__title section__title--center">С какими вопросами приходят чаще всего</h2>
+      <p class="section__lead">Расклад работает лучше, когда вопрос конкретный. «Что мне делать» даёт размытый ответ, «на что обратить внимание в этой ситуации» — внятный.</p>
+
+      <div class="cases">
+        <article class="case">
+          <span class="case__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.4-7 10-7 10z"/></svg></span>
+          <h3>Отношения</h3>
+          <p>Что происходит между вами, чего вы не замечаете и какой шаг снимет напряжение. Самая частая тема расклада.</p>
+        </article>
+        <article class="case">
+          <span class="case__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M4 12h16"/></svg></span>
+          <h3>Работа и деньги</h3>
+          <p>Стоит ли менять место, что мешает договориться, где сейчас реальная точка роста, а где её только видно.</p>
+        </article>
+        <article class="case">
+          <span class="case__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3v12M18 9v12"/><path d="M6 9c4-4 8 4 12 0"/></svg></span>
+          <h3>Выбор из двух</h3>
+          <p>Когда оба варианта выглядят равнозначно. Карты не выбирают за вас, но показывают, что вы в каждом варианте теряете.</p>
+        </article>
+        <article class="case">
+          <span class="case__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <h3>Карта дня</h3>
+          <p>Короткий формат на утро: один вопрос, одна тема, к которой стоит присмотреться сегодня.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ТЕКСТ ДЛЯ ПОИСКА ============================ -->
+  <section class="section" id="about">
+    <div class="shell">
+      <h2 class="section__title section__title--center">Расклад Таро онлайн: как им пользоваться</h2>
+
+      <nav class="seo__toc" aria-label="Содержание статьи">
+        <p class="seo__toc-title">В статье</p>
+        <div class="seo__toc-list">
+          <a href="#a1"><span>01</span>Что такое расклад Таро простыми словами</a>
+          <a href="#a2"><span>02</span>Как сделать расклад Таро онлайн</a>
+          <a href="#a3"><span>03</span>Расклад на три карты: почему именно три</a>
+          <a href="#a4"><span>04</span>Как правильно задать вопрос картам</a>
+          <a href="#a5"><span>05</span>Таро на отношения</a>
+          <a href="#a6"><span>06</span>Колода Уэйта и старшие арканы</a>
+          <a href="#a7"><span>07</span>Гадание на Таро онлайн бесплатно: что ждать</a>
+          <a href="#a8"><span>08</span>Чего расклад не делает</a>
+        </div>
+      </nav>
+
+      <div class="seo__body">
+        <p class="seo__lead-p">Расклад Таро — это способ посмотреть на свою ситуацию под другим углом. Карты вытягиваются случайно, но значения у них устойчивые, и наложенные на конкретный вопрос они работают как набор зеркал: показывают то, что вы уже знаете, но не сформулировали.</p>
+
+        <h3 id="a1">Что такое расклад Таро простыми словами</h3>
+        <p>Колода делится на старшие и младшие арканы. В раскладе каждая вытянутая карта попадает в свою позицию, и позиция задаёт, о чём именно эта карта говорит. Одна и та же Луна в позиции «что происходит» и в позиции «что скрыто» читается по-разному.</p>
+        <p>Именно сочетание «карта плюс позиция» и превращает набор картинок в ответ. Без позиций это просто перечисление значений, из которого каждый вычитывает что хочет.</p>
+
+        <h3 id="a2">Как сделать расклад Таро онлайн</h3>
+        <p>Порядок одинаковый и в браузере, и в боте:</p>
+        <ul class="seo__list">
+          <li>Сформулируйте вопрос — одним предложением, про конкретную ситуацию</li>
+          <li>Запустите расклад: три карты вытягиваются случайным образом</li>
+          <li>Посмотрите названия и ключевые слова каждой карты</li>
+          <li>Откройте расшифровку: связный разбор по позициям и совет к каждой карте</li>
+        </ul>
+        <p>Сделать расклад Таро онлайн бесплатно можно прямо на сайте — первый результат с картами и ключевыми словами доступен сразу, без оплаты и регистрации.</p>
+
+        <h3 id="a3">Расклад на три карты: почему именно три</h3>
+        <p>Три карты — золотая середина. Одна даёт слишком общий ответ, десять превращаются в полотно, которое начинающий читает кусками и теряет связность. Три позиции описывают ситуацию целиком: что есть, что под поверхностью и куда идти.</p>
+        <p>Эту же тройку часто называют «прошлое — настоящее — будущее», но такая разбивка работает хуже. Прошлое вы и так знаете, а будущее в раскладе на три карты обозначено как направление, а не как факт.</p>
+
+        <div class="seo__quote">
+          <p>Расклад не задаёт неизбежный сценарий. Он описывает расстановку сил на сегодня — и меняется вместе с тем, что вы делаете.</p>
+        </div>
+
+        <h3 id="a4">Как правильно задать вопрос картам</h3>
+        <p>От формулировки зависит больше, чем от самих карт. Вопросы на «да или нет» дают наименее полезные ответы: три карты всё равно опишут ситуацию, а вы будете вычитывать в них односложный приговор.</p>
+        <p>Что работает лучше:</p>
+        <ul class="seo__list">
+          <li>«На что обратить внимание в этой ситуации» вместо «чем всё кончится»</li>
+          <li>Один вопрос за раз — два вопроса в одном дают смазанный расклад</li>
+          <li>Вопрос про себя и свои действия, а не про чужие мысли</li>
+          <li>Конкретный срок, если он важен: «в ближайшие полгода», а не «когда-нибудь»</li>
+        </ul>
+
+        <h3 id="a5">Таро на отношения</h3>
+        <p>Расклад Таро на отношения — самый частый запрос, и у него есть особенность. Карты показывают динамику между двумя людьми, но отвечают они вам, а не партнёру. Позиция «что скрыто» чаще говорит не о чужой тайне, а о ваших собственных допущениях насчёт происходящего.</p>
+        <p>Поэтому и совет в таком раскладе почти всегда про прояснение: задать прямой вопрос, проверить догадку, обозначить ожидание. Это скучнее, чем предсказание, но заметно полезнее.</p>
+
+        <h3 id="a6">Колода Уэйта и старшие арканы</h3>
+        <p>Расклад идёт на колоде Райдера-Уэйта — самой распространённой в мире. Её рисунки создавались так, чтобы значение считывалось с самой картинки, и именно поэтому она удобна новичку: не нужно держать в голове таблицу соответствий.</p>
+        <p>Старшие арканы вроде Луны, Звезды или Влюблённых отвечают за крупные темы и поворотные моменты, младшие — за бытовые детали. Если в раскладе выпало несколько старших арканов, тема для вас действительно значимая.</p>
+
+        <h3 id="a7">Гадание на Таро онлайн бесплатно: что ждать</h3>
+        <p>Бесплатные расклады в сети бывают двух видов. Одни честно тянут случайные карты и дают их значения. Другие подставляют заранее заготовленный «позитивный» текст, никак не связанный с выпавшими картами, — отличить просто: пройдите расклад дважды с разными вопросами и сравните тексты.</p>
+        <p>Здесь карты и ключевые слова бесплатны, а развёрнутая расшифровка — платная часть. Логика простая: вытянуть карты несложно, а собрать из них связный разбор под конкретный вопрос — это и есть работа.</p>
+
+        <h3 id="a8">Чего расклад не делает</h3>
+        <p>Таро не заменяет врача, юриста и финансового консультанта. Вопросы про здоровье, диагнозы, судебные дела и крупные вложения стоит задавать специалистам, а не картам: цена ошибки там слишком высока.</p>
+        <p>И ещё одно, что стоит держать в голове: расклад описывает ситуацию, а не выносит приговор. Если результат вызывает тревогу вместо ясности, это повод отложить карты, а не раскладывать ещё раз до «хорошего» ответа.</p>
+      </div>
+
+      <div class="faq" id="faq">
+        <details class="faq-item">
+          <summary>Расклад Таро онлайн — это бесплатно?</summary>
+          <div class="answer"><p>Сам расклад и ключевые значения карт — да, они открываются сразу после вопроса. Развёрнутая расшифровка по позициям с советами к каждой карте входит в платную часть.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Как сделать расклад на три карты?</summary>
+          <div class="answer"><p>Напишите вопрос одним предложением и запустите расклад. Три карты вытягиваются случайно и ложатся в позиции «что происходит», «что скрыто» и «твой следующий шаг». Дальше открывается расшифровка.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Чем Telegram-бот отличается от сайта?</summary>
+          <div class="answer"><p>Ничем по сути расклада — отличается только то, где он живёт. В боте вопрос задаётся обычным сообщением, а расклад остаётся в истории чата, к нему можно вернуться через месяц. На сайте удобнее читать длинную расшифровку с большого экрана.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Какая используется колода?</summary>
+          <div class="answer"><p>Райдера-Уэйта — самая распространённая колода в мире. Её рисунки сделаны так, чтобы значение считывалось прямо с картинки, поэтому она удобна и новичку, и тем, кто читает карты давно.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Как правильно задать вопрос картам?</summary>
+          <div class="answer"><p>Одним предложением, про конкретную ситуацию и про свои действия. «На что обратить внимание» работает лучше, чем «чем всё кончится». Вопросы на «да или нет» дают наименее полезный результат.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Можно ли делать расклад на один вопрос несколько раз?</summary>
+          <div class="answer"><p>Технически да, но смысла мало. Повторный расклад на тот же вопрос обычно означает, что первый ответ не понравился. Лучше изменить сам вопрос — спросить не «чем кончится», а «что я упускаю».</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Карты предсказывают будущее?</summary>
+          <div class="answer"><p>Нет. Расклад описывает расстановку сил на сегодня и возможное направление, а не готовый сценарий. Результат меняется вместе с тем, что вы делаете — в этом и смысл позиции «следующий шаг».</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Можно ли спрашивать про здоровье или деньги?</summary>
+          <div class="answer"><p>Про общее самочувствие ситуации — да, про диагнозы, лечение, суды и крупные вложения — нет. Такие вопросы стоит задавать врачу, юристу или финансовому консультанту: цена ошибки слишком высока, чтобы полагаться на карты.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ФИНАЛЬНЫЙ ПРИЗЫВ ============================ -->
+  <section class="cta">
+    <div class="shell">
+      <div class="cta__card">
+        <h2>Спросите карты прямо сейчас</h2>
+        <p>Сформулируйте вопрос одним предложением — и получите расклад на три карты с расшифровкой. В браузере или в Telegram, как удобнее.</p>
+        <div class="cta__actions">
+          <a class="btn btn--violet" data-cta href="https://vitrio.space/8nnj73xngh" target="_blank" rel="sponsored noopener">Сделать расклад на сайте</a>
+          <a class="btn btn--tg" data-cta href="https://t.me/TaroVitrioBot" target="_blank" rel="sponsored noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L7.1 12.4 2.6 11c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.1 1.7z"/></svg>
+            Открыть бота
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ ПОДВАЛ ============================ -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="#top" aria-label="Vitrio Таро">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="38" height="38" rx="11" fill="#7c5cfc"/>
+              <path d="M20 9l2.4 5.9 5.9 2.4-5.9 2.4L20 25.6l-2.4-5.9-5.9-2.4 5.9-2.4z" fill="#fff"/>
+              <circle cx="29" cy="28" r="2.1" fill="#e5bd68"/>
+              <circle cx="12" cy="27" r="1.5" fill="#e5bd68"/>
+            </svg>
+          </span>
+          <span class="logo__text">vitrio</span>
+          <span class="logo__sub">Таро</span>
+        </a>
+        <p class="footer__about">Расклад Таро на три карты колоды Уэйта с расшифровкой по позициям. В браузере и в Telegram.<br>© 2026 Vitrio</p>
+      </div>
+
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#how">Как это работает</a></li>
+          <li><a href="#telegram">Бот в Telegram</a></li>
+          <li><a href="#read">Пример разбора</a></li>
+          <li><a href="#about">Про расклады</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Начать</h4>
+        <ul>
+          <li><a data-cta href="https://vitrio.space/8nnj73xngh" target="_blank" rel="sponsored noopener">Расклад в браузере</a></li>
+          <li><a data-cta href="https://t.me/TaroVitrioBot" target="_blank" rel="sponsored noopener">Расклад в Telegram</a></li>
+          <li><a href="#faq">Частые вопросы</a></li>
+          <li><a href="mailto:support@vitrio.space">support@vitrio.space</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">
+      Сервис создан для размышления и самоанализа. Расклад не является предсказанием
+      и не заменяет консультацию врача, юриста или финансового специалиста.
+      Решения вы принимаете самостоятельно. 18+
+    </p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Расклад Таро онлайн — это бесплатно?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Сам расклад и ключевые значения карт — да, они открываются сразу после вопроса. Развёрнутая расшифровка по позициям с советами к каждой карте входит в платную часть."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как сделать расклад на три карты?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Напишите вопрос одним предложением и запустите расклад. Три карты вытягиваются случайно и ложатся в позиции «что происходит», «что скрыто» и «твой следующий шаг». Дальше открывается расшифровка."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чем Telegram-бот отличается от сайта?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ничем по сути расклада — отличается только то, где он живёт. В боте вопрос задаётся обычным сообщением, а расклад остаётся в истории чата. На сайте удобнее читать длинную расшифровку с большого экрана."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какая используется колода?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Райдера-Уэйта — самая распространённая колода в мире. Её рисунки сделаны так, чтобы значение считывалось прямо с картинки, поэтому она удобна и новичку, и тем, кто читает карты давно."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как правильно задать вопрос картам?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Одним предложением, про конкретную ситуацию и про свои действия. «На что обратить внимание» работает лучше, чем «чем всё кончится». Вопросы на «да или нет» дают наименее полезный результат."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно ли делать расклад на один вопрос несколько раз?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Технически да, но смысла мало. Повторный расклад на тот же вопрос обычно означает, что первый ответ не понравился. Лучше изменить сам вопрос."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Карты предсказывают будущее?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Расклад описывает расстановку сил на сегодня и возможное направление, а не готовый сценарий. Результат меняется вместе с тем, что вы делаете."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно ли спрашивать про здоровье или деньги?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Про общее самочувствие ситуации — да, про диагнозы, лечение, суды и крупные вложения — нет. Такие вопросы стоит задавать врачу, юристу или финансовому консультанту."
+      }
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
