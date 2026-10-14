@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tarovopros.ru/sitemap.xml
+Sitemap: https://raskladtaroonline.ru/sitemap.xml
