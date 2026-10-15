@@ -1,4 +1,35 @@
 /* ============================================================
+   RR Opague — шрифт лежит свой, не с Google Fonts.
+   Три начертания: 400 — текст, 700 и 800 — заголовки. Пятисотое
+   начертание не подключено: font-weight:500 на странице нигде нет,
+   а 600 браузер по правилам подбора округляет вверх, до 700.
+   Курсивов нет — на странице они нигде не используются.
+
+   Подрезан под латиницу, кириллицу и ту пунктуацию, что реально
+   встречается в тексте («», —, ·, •, ©). Исходные OTF по 200 КБ,
+   после подрезки и woff2 — по 27 КБ.
+
+   font-display:swap — текст показывается сразу системным шрифтом
+   и переключается, когда файл доедет. Без этого первые полсекунды
+   страница стоит пустой.
+   ============================================================ */
+@font-face{
+  font-family:"RR Opague";
+  src:url("fonts/rropague-400.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"RR Opague";
+  src:url("fonts/rropague-700.woff2") format("woff2");
+  font-weight:700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"RR Opague";
+  src:url("fonts/rropague-800.woff2") format("woff2");
+  font-weight:800;font-style:normal;font-display:swap;
+}
+
+/* ============================================================
    Таро — лендинг. Тёмная индиго-фиолетовая тема.
    Палитра снята с самого сервиса: ночное небо, сиреневый акцент,
    золото на блоках «совет карты».
@@ -45,7 +76,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-family:"RR Opague",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
